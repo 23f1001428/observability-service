@@ -23,17 +23,18 @@ start_time = time.time()
 @app.middleware("http")
 async def middleware(request: Request, call_next):
     request_id = str(uuid.uuid4())
+    ts = time.time()
 
     response = await call_next(request)
 
-    http_requests_total.labels(path=request.url.path).inc()
-
     logs.append({
         "level": "info",
-        "ts": time.time(),
+        "ts": ts,
         "path": request.url.path,
         "request_id": request_id
     })
+
+    http_requests_total.labels(path=request.url.path).inc()
 
     return response
 
