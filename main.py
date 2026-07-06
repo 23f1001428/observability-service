@@ -42,7 +42,11 @@ async def middleware(request: Request, call_next):
 @app.get("/work")
 async def work(n: int = 1):
     await asyncio.sleep(n * 0.01)
-    return {"email": "user@example.com", "done": n}
+
+    return {
+        "email": "23f1001428@ds.study.iitm.ac.in",
+        "done": n
+    }
 
 
 # ---------- /metrics ----------
